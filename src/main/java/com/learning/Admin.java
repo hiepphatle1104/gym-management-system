@@ -1,17 +1,16 @@
 package com.learning;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Admin extends User {
-    private List<Member> members;
-    private List<Trainer> trainers;
+    private final MemberManager memberManager;
+    private final TrainerManager trainerManager;
 
     public Admin(String username) {
         super(username);
         this.setRole(UserRole.ADMIN);
-        this.members = new ArrayList<>();
-        this.trainers = new ArrayList<>();
+        this.memberManager = new MemberManager();
+        this.trainerManager = new TrainerManager();
     }
 
     @Override
@@ -42,30 +41,11 @@ public class Admin extends User {
     }
 
     public List<Member> getMembers() {
-        return this.members;
+        return memberManager.getUserList();
     }
 
     public List<Trainer> getTrainers() {
-        return this.trainers;
-    }
-
-    public void addMember() {
-        IO.print("Please enter username: ");
-        String username = sc.nextLine();
-
-        this.members.add(new Member(username));
-        IO.println("Success");
-    }
-
-    public void listMembers() {
-        for (Member member : this.members)
-            IO.println(member.toString());
-    }
-
-    public void deleteMember() {
-        IO.print("Please enter username: ");
-        String username = sc.nextLine();
-        this.members.removeIf(member -> member.getUsername().equals(username));
+        return trainerManager.getUserList();
     }
 
     public void manageMembers() {
@@ -83,21 +63,11 @@ public class Admin extends User {
         if (choice == 5) return;
 
         switch (choice) {
-            case 1:
-                listMembers();
-                break;
-            case 2:
-                addMember();
-                break;
-            case 3:
-                IO.println("Update member ( Coming soon )");
-                break;
-            case 4:
-                deleteMember();
-                break;
-            default:
-                IO.println("Invalid option");
-                break;
+            case 1 -> memberManager.listUser();
+            case 2 -> memberManager.addUser();
+            case 3 -> memberManager.updateUser();
+            case 4 -> memberManager.deleteUser();
+            default -> IO.println("Invalid option");
         }
     }
 
