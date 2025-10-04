@@ -31,7 +31,10 @@ public class Trainer extends User {
         }
     }
 
-    public void manageWorkout() {}
+    public void manageWorkout() {
+        IO.println("1. Assign workout");
+        IO.println("2. View workout");
+    }
 
     public void viewReport() {}
 

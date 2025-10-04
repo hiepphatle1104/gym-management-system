@@ -2,10 +2,12 @@ package com.learning;
 
 public class Member extends User {
     private Membership membership;
+    private final ScheduleService scheduleService;
 
     public Member(String username) {
         super("MEM", username);
         this.setRole(UserRole.MEMBER);
+        this.scheduleService = new ScheduleService();
     }
 
     public void setMembership(Membership membership) {
@@ -43,7 +45,9 @@ public class Member extends User {
         IO.println(membership.toString());
     }
 
-    public void viewSchedules() {}
+    public void viewSchedules() {
+        scheduleService.listSchedules();
+    }
 
     public void viewAttendance() {}
 
