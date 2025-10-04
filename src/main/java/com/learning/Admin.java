@@ -71,7 +71,28 @@ public class Admin extends User {
         }
     }
 
-    public void manageTrainers() {}
+    public void manageTrainers() {
+        IO.println("---[ Trainer Management ]---");
+        IO.println("1. View trainer list");
+        IO.println("2. Add trainer");
+        IO.println("3. Update trainer");
+        IO.println("4. Delete trainer");
+        IO.println("5. Exit");
+
+        IO.print("Select an option: ");
+        int choice = sc.nextInt();
+        sc.nextLine();
+
+        if (choice == 5) return;
+
+        switch (choice) {
+            case 1 -> trainerManager.listUser();
+            case 2 -> trainerManager.addUser();
+            case 3 -> trainerManager.updateUser();
+            case 4 -> trainerManager.deleteUser();
+            default -> IO.println("Invalid option");
+        }
+    }
 
     public void manageSubscription() {}
 
