@@ -1,10 +1,18 @@
 package com.learning;
 
 public class Member extends User {
+    private Membership membership;
+
     public Member(String username) {
-        super(username);
+        super("MEM", username);
         this.setRole(UserRole.MEMBER);
     }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
+    }
+
+    public Membership getMembership() {return membership;}
 
     @Override
     public void showMenu() {
@@ -32,7 +40,7 @@ public class Member extends User {
     }
 
     public void viewSubscription() {
-        IO.println("View subscription");
+        IO.println(membership.toString());
     }
 
     public void viewSchedules() {}

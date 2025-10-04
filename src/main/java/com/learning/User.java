@@ -9,9 +9,9 @@ public abstract class User {
     private UserRole role;
     protected Scanner sc;
 
-    protected User(String username) {
+    protected User(String tag, String username) {
         this.username = username;
-        this.id = UUID.randomUUID().toString().replace("-", "");
+        this.id = tag + "-" + UUID.randomUUID().toString().substring(0, 8);
     }
 
     @Override

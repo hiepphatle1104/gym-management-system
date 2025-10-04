@@ -2,7 +2,7 @@ package com.learning;
 
 public class Trainer extends User {
     public Trainer(String username) {
-        super(username);
+        super("TRN", username);
         this.setRole(UserRole.TRAINER);
     }
 

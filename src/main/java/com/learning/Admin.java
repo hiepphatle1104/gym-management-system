@@ -5,12 +5,14 @@ import java.util.List;
 public class Admin extends User {
     private final MemberManager memberManager;
     private final TrainerManager trainerManager;
+    private final SubscriptionService subscriptionService;
 
     public Admin(String username) {
-        super(username);
+        super("ADM", username);
         this.setRole(UserRole.ADMIN);
         this.memberManager = new MemberManager();
         this.trainerManager = new TrainerManager();
+        this.subscriptionService = new SubscriptionService();
     }
 
     @Override
@@ -94,7 +96,28 @@ public class Admin extends User {
         }
     }
 
-    public void manageSubscription() {}
+    public void manageSubscription() {
+        IO.println("---[ Subscription Management ]---");
+        IO.println("1. View all");
+        IO.println("2. Add");
+        IO.println("3. Update");
+        IO.println("4. Delete");
+        IO.println("5. Exit");
+
+        IO.print("Select an option: ");
+        int choice = sc.nextInt();
+        sc.nextLine();
+
+        if (choice == 5) return;
+
+        switch (choice) {
+            case 1 -> SubscriptionService.listSubscriptions();
+            case 2 -> subscriptionService.addSubscription();
+            case 3 -> subscriptionService.updateSubscription();
+            case 4 -> subscriptionService.deleteSubscription();
+            default -> IO.println("Invalid option");
+        }
+    }
 
     public void manageEquipments() {}
 
