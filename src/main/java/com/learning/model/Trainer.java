@@ -1,4 +1,4 @@
-package com.learning;
+package com.learning.model;
 
 public class Trainer extends User {
     public Trainer(String username) {

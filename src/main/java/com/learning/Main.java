@@ -1,5 +1,8 @@
 package com.learning;
 
+import com.learning.model.Admin;
+import com.learning.model.User;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
