@@ -12,10 +12,12 @@ public abstract class Manager<T extends User> {
         return this.userList;
     }
 
+    public abstract T getUser(String name);
+
     public abstract void addUser();
 
     public void listUser() {
-        for (T user : this.userList)
+        for (T user : userList)
             IO.println(user.toString());
     }
 

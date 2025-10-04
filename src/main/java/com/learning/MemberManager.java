@@ -2,6 +2,11 @@ package com.learning;
 
 public class MemberManager extends Manager<Member> {
     @Override
+    public Member getUser(String name) {
+        return userList.stream().filter(u -> u.getUsername().equals(name)).findFirst().orElse(null);
+    }
+
+    @Override
     public void addUser() {
         IO.print("Please enter username: ");
         String username = sc.nextLine();
@@ -21,6 +26,6 @@ public class MemberManager extends Manager<Member> {
 
     @Override
     public void updateUser() {
-
     }
+
 }

@@ -2,6 +2,11 @@ package com.learning;
 
 public class TrainerManager extends Manager<Trainer> {
     @Override
+    public Trainer getUser(String name) {
+        return null;
+    }
+
+    @Override
     public void addUser() {
         IO.print("Please enter username: ");
         String username = sc.nextLine();
