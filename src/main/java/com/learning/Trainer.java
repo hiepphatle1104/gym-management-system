@@ -8,12 +8,27 @@ public class Trainer extends User {
 
     @Override
     public void showMenu() {
-        IO.println("\n---[ Trainer Menu ]---");
-        IO.println("1. Manage workout");
-        IO.println("2. View report");
-        IO.println("3. View progress");
-        IO.println("4. View attendance");
-        IO.println("5. Exit");
+        while (true) {
+            IO.println("\n---[ Trainer Menu ]---");
+            IO.println("1. Manage workout");
+            IO.println("2. View report");
+            IO.println("3. View progress");
+            IO.println("4. View attendance");
+            IO.println("5. Exit");
+
+            IO.print("Select an option: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            if (choice == 5) break;
+            switch (choice) {
+                case 1 -> manageWorkout();
+                case 2 -> viewReport();
+                case 3 -> viewProgress();
+                case 4 -> viewAttendance();
+                default -> IO.println("Invalid option. Try again.");
+            }
+        }
     }
 
     public void manageWorkout() {}
