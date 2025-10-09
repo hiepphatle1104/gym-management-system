@@ -98,7 +98,6 @@ public class SubscriptionService extends Service {
             IO.println("No subscriptions found");
     }
 
-
     @Override
     public void load() {
         // Handle new file

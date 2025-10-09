@@ -1,22 +1,20 @@
 package com.learning.service;
 
-import com.learning.domain.Member;
-import com.learning.domain.Subscription;
+import com.learning.domain.Trainer;
 import com.learning.domain.User;
 import com.learning.domain.enums.UserRole;
 
-public class MemberService extends UserService<Member> {
-    private final SubscriptionService subscriptionService = new SubscriptionService();
+public class TrainerService extends UserService<Trainer> {
 
     @Override
     public void showMenu() {
         load();
         while (true) {
-            IO.println("---[ Member Management ]---");
-            IO.println("1. Create new member");
-            IO.println("2. Update member");
-            IO.println("3. Delete member");
-            IO.println("4. View all member");
+            IO.println("---[ Trainer Management ]---");
+            IO.println("1. Create new trainer");
+            IO.println("2. Update trainer");
+            IO.println("3. Delete trainer");
+            IO.println("4. View all trainer");
             IO.println("0. Return");
 
             IO.print("Enter your choice: ");
@@ -41,23 +39,7 @@ public class MemberService extends UserService<Member> {
         IO.print("Enter password: ");
         String password = sc.nextLine();
 
-        if (subscriptionService.getSubscriptions().isEmpty()) {
-            IO.println("No subscriptions found");
-            return;
-        }
-
-        subscriptionService.list();
-
-        IO.print("Choose subscription plan (name): ");
-        String planName = sc.nextLine();
-
-        Subscription plan = subscriptionService.getPlan(planName);
-        if (plan == null) {
-            IO.println("Invalid subscription plan");
-            return;
-        }
-
-        users.add(new Member(username, password, plan));
+        users.add(new Trainer(username, password));
         persist();
     }
 
@@ -73,9 +55,9 @@ public class MemberService extends UserService<Member> {
 
     @Override
     public void list() {
-        IO.println("- Members list");
+        IO.println("- Trainer list");
         for (User user : users)
-            if (user.getRole().equals(UserRole.MEMBER))
+            if (user.getRole().equals(UserRole.TRAINER))
                 IO.println(user.toString());
     }
 }

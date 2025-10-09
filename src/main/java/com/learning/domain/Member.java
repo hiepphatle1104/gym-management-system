@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Member extends User {
-    private Membership membership;
+    private final Membership membership;
     private List<Attendance> attendances = new ArrayList<>();
     private List<Schedule> schedules = new ArrayList<>();
 
@@ -16,7 +16,17 @@ public class Member extends User {
     }
 
     // Schedule
-    private void viewSchedules() {}
+    private void viewSchedules() {
+        IO.println("- Schedules");
+
+        if (schedules.isEmpty()) {
+            IO.println("- No schedules");
+            return;
+        }
+
+        for (Schedule schedule : schedules)
+            IO.println(schedule);
+    }
 
     // Progress
     private void manageProgress() {}
@@ -25,7 +35,24 @@ public class Member extends User {
     private void markAttendance() {}
 
     // Membership
-    private void manageMembership() {}
+    private void manageMembership() {
+        while (true) {
+            IO.println("---[ Membership Management ]---");
+            IO.println("1. View");
+            IO.println("2. Renew");
+            IO.println("0. Return");
+
+            IO.print("Enter your choice: ");
+            int opts = Integer.parseInt(sc.nextLine());
+            if (opts == 0) break;
+
+            switch (opts) {
+                case 1 -> IO.println(membership.toString());
+                case 2 -> membership.renew();
+                default -> IO.println("Invalid choice");
+            }
+        }
+    }
 
 
     @Override
@@ -52,6 +79,8 @@ public class Member extends User {
 
             switch (opts) {
                 case 1 -> viewSchedules();
+                case 4 -> manageMembership();
+                default -> IO.println("Invalid choice");
             }
         }
     }

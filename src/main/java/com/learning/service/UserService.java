@@ -37,17 +37,6 @@ public abstract class UserService<T extends User> extends Service {
         return isValid ? user : null;
     }
 
-//    public User authenticate(String username, String password) {
-//        ensureLoaded();
-//        User u = getUserByUsername(username);
-//        if (u == null) return null;
-//        String hash = u.getPasswordHash();
-//        if (hash == null) return null;
-//        boolean ok = BCrypt.checkpw(password, hash);
-//        return ok ? u : null;
-//    }
-
-
     @Override
     public void load() {
         try (Reader reader = new FileReader(fileName)) {

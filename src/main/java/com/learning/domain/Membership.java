@@ -8,14 +8,22 @@ public class Membership {
     private String name;
     private MembershipStatus status;
     private String expiredAt;
+    private final int duration;
     private double fee;
 
     public Membership(Subscription plan) {
         LocalDate now = LocalDate.now();
         this.name = plan.getName();
         this.status = MembershipStatus.ACTIVATED;
+        this.duration = plan.getDuration();
         this.expiredAt = now.plusDays(plan.getDuration()).toString();
         this.fee = plan.getFee();
+    }
+
+    public void renew() {
+        LocalDate now = LocalDate.now();
+        this.setExpiredAt(now.plusDays(duration + 1).toString());
+        this.setStatus(MembershipStatus.ACTIVATED);
     }
 
     public String getName() {
@@ -48,5 +56,15 @@ public class Membership {
 
     public void setFee(double fee) {
         this.fee = fee;
+    }
+
+    @Override
+    public String toString() {
+        return "Membership{" +
+                "name='" + name + '\'' +
+                ", status=" + status +
+                ", expiredAt='" + expiredAt + '\'' +
+                ", fee=" + fee +
+                '}';
     }
 }
