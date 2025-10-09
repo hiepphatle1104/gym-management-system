@@ -1,7 +1,23 @@
 [
   {
+    "id": "1f1c9def",
     "username": "admin",
     "password": "admin",
     "role": "ADMIN"
+  },
+  {
+    "membership": {
+      "name": "one-month",
+      "status": "ACTIVATED",
+      "expiredAt": "2025-11-08",
+      "duration": 30,
+      "fee": 100.0
+    },
+    "attendances": [],
+    "schedules": [],
+    "id": "a33efe7c",
+    "username": "hphat",
+    "password": "123",
+    "role": "MEMBER"
   }
 ]
