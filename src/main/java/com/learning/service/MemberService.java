@@ -1,10 +1,11 @@
 package com.learning.service;
 
 import com.learning.domain.Member;
+import com.learning.domain.Subscription;
 import com.learning.domain.User;
 
 public class MemberService extends UserService<Member> {
-    private SubscriptionService subscriptionService;
+    private final SubscriptionService subscriptionService = new SubscriptionService();
 
     @Override
     public void showMenu() {
@@ -39,11 +40,23 @@ public class MemberService extends UserService<Member> {
         IO.print("Enter password: ");
         String password = sc.nextLine();
 
-        subscriptionService.list();
-        IO.println("Choose subscription plan (name): ");
-        String subscriptionPlan = sc.nextLine();
+        if (subscriptionService.getSubscriptions().isEmpty()) {
+            IO.println("No subscriptions found");
+            return;
+        }
 
-        users.add(new Member(username, password));
+        subscriptionService.list();
+
+        IO.print("Choose subscription plan (name): ");
+        String planName = sc.nextLine();
+
+        Subscription plan = subscriptionService.getPlan(planName);
+        if (plan == null) {
+            IO.println("Invalid subscription plan");
+            return;
+        }
+
+        users.add(new Member(username, password, plan));
         persist();
     }
 

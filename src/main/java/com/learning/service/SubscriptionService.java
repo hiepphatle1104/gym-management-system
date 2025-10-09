@@ -20,6 +20,18 @@ public class SubscriptionService extends Service {
     }.getType();
     private static final String filePath = "data/plans.json";
 
+    public SubscriptionService() {
+        load();
+    }
+
+    public List<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public Subscription getPlan(String planName) {
+        return subscriptions.stream().filter(s -> s.getName().equals(planName)).findFirst().orElse(null);
+    }
+
     @Override
     public void showMenu() {
         load();
@@ -78,8 +90,12 @@ public class SubscriptionService extends Service {
     @Override
     public void list() {
         IO.println("- Subscriptions list");
-        for (Subscription s : subscriptions)
-            IO.println(s.toString());
+        if (!subscriptions.isEmpty())
+            for (Subscription s : subscriptions)
+                IO.println(s.toString());
+
+        if (subscriptions.isEmpty())
+            IO.println("No subscriptions found");
     }
 
 
