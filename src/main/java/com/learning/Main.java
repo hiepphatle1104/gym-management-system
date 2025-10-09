@@ -1,17 +1,41 @@
 package com.learning;
 
-import com.learning.models.Member;
-import com.learning.service.AuthService;
-import com.learning.service.MemberService;
+import com.learning.domain.User;
+import com.learning.service.UserService;
 
-import java.io.*;
 import java.util.Scanner;
 
 public class Main {
-    static AuthService authService = new AuthService();
+
+    private static final UserService userService = new UserService<>() {
+        @Override
+        public void showMenu() {
+
+        }
+
+        @Override
+        public void save() {
+
+        }
+
+        @Override
+        public void delete() {
+
+        }
+
+        @Override
+        public void update() {
+
+        }
+
+        @Override
+        public void list() {
+
+        }
+    };
 
     static void showMenu(Scanner sc) {
-        while(true) {
+        while (true) {
             IO.println("1. Login");
             IO.println("2. Exit");
 
@@ -26,16 +50,21 @@ public class Main {
             IO.print("Enter your password: ");
             String password = sc.nextLine();
 
-//            authService.login(username, password);
+            User user = userService.authenticate(username, password);
+            if (user == null) {
+                IO.println("Invalid username or password");
+                continue;
+            }
+
+            user.showMenu();
         }
     }
 
     static void main() {
-        MemberService memberService = new MemberService();
-        Member member = new Member("hphat", "123");
+        Scanner sc = new Scanner(System.in);
+        showMenu(sc);
 
-        memberService.loadFile();
-        memberService.save(member);
-        memberService.getMembers();
+        IO.println("Goodbye");
+        sc.close();
     }
 }

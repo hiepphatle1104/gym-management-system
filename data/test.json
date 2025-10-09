@@ -1,0 +1,14 @@
+[
+  {
+    "username": "admin",
+    "password": "admin",
+    "role": "ADMIN"
+  },
+  {
+    "attendances": [],
+    "schedules": [],
+    "username": "hphat",
+    "password": "123",
+    "role": "MEMBER"
+  }
+]
