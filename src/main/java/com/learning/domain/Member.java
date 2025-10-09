@@ -10,8 +10,9 @@ public class Member extends User {
     private List<Attendance> attendances = new ArrayList<>();
     private List<Schedule> schedules = new ArrayList<>();
 
-    public Member(String username, String password) {
+    public Member(String username, String password, Subscription plan) {
         super(username, password, UserRole.MEMBER);
+        this.membership = new Membership(plan);
     }
 
     // Schedule
