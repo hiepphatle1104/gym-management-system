@@ -1,43 +1,66 @@
 package com.learning.service;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.learning.models.Member;
+import com.learning.domain.Member;
+import com.learning.domain.User;
 
-import java.io.*;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+public class MemberService extends UserService<Member> {
+    private SubscriptionService subscriptionService;
 
-public class MemberService {
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private static final String fileDirectory = "data/members.json";
-    private static List<Member> members = new ArrayList<>();
-    private static final Type listType = new TypeToken<List<Member>>(){}.getType();
+    @Override
+    public void showMenu() {
+        load();
+        while (true) {
+            IO.println("---[ Member Management ]---");
+            IO.println("1. Create new member");
+            IO.println("2. Update member");
+            IO.println("3. Delete member");
+            IO.println("4. View all member");
+            IO.println("0. Return");
 
-    public void loadFile() {
-        try (Reader reader = new FileReader(fileDirectory)) {
-            members = gson.fromJson(reader, listType);
-        } catch (IOException e) {
-            IO.println("Error while listing members: " + e.getMessage());
+            IO.print("Enter your choice: ");
+            int opts = Integer.parseInt(sc.nextLine());
+            if (opts == 0) break;
+
+            switch (opts) {
+                case 1 -> save();
+                case 2 -> update();
+                case 3 -> delete();
+                case 4 -> list();
+                default -> IO.println("Invalid option");
+            }
         }
     }
 
-    public void getMembers() {
-        for (Member member : members)
-            IO.println(member.toString());
+    @Override
+    public void save() {
+        IO.print("Enter username: ");
+        String username = sc.nextLine();
+
+        IO.print("Enter password: ");
+        String password = sc.nextLine();
+
+        subscriptionService.list();
+        IO.println("Choose subscription plan (name): ");
+        String subscriptionPlan = sc.nextLine();
+
+        users.add(new Member(username, password));
+        persist();
     }
 
-    public void save(Member member) {
-        try (Writer writer = new FileWriter(fileDirectory)) {
-            if (members.contains(member))
-                return;
+    @Override
+    public void delete() {
 
-        } catch (IOException e) {
-            IO.println("Error while saving member: " + e.getMessage());
-        }
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void list() {
+        IO.println("- Members list");
+        for (User user : users)
+            IO.println(user.toString());
     }
 }

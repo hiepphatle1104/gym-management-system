@@ -1,0 +1,60 @@
+[
+  {
+    "username": "admin",
+    "password": "admin",
+    "role": "ADMIN"
+  },
+  {
+    "username": "tester",
+    "password": "test",
+    "role": "TRAINER"
+  },
+  {
+    "username": "hphats",
+    "password": "123",
+    "role": "MEMBER",
+    "membership": {
+      "name": "one-month",
+      "status": "DEACTIVATED",
+      "expiredAt": "",
+      "fee": 100
+    },
+    "attendances": [
+      {
+        "status": "PRESENT",
+        "notes": "something",
+        "createdAt": ""
+      },
+      {
+        "status": "ABSENT",
+        "notes": "something",
+        "createdAt": ""
+      }
+    ],
+    "schedules": [
+      {
+        "trainerName": "tester",
+        "status": "ACTIVE",
+        "days": [
+          "MONDAY",
+          "WEDNESDAY",
+          "SUNDAY"
+        ],
+        "workouts": [
+          {
+            "name": "boxing",
+            "description": "something",
+            "reps": 12,
+            "sets": 3
+          },
+          {
+            "name": "running",
+            "description": "something",
+            "reps": 5,
+            "sets": 3
+          }
+        ]
+      }
+    ]
+  }
+]

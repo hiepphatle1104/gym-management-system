@@ -1,0 +1,12 @@
+[
+  {
+    "name": "test-month",
+    "duration": 30,
+    "fee": 200.0
+  },
+  {
+    "name": "test-month2",
+    "duration": 60,
+    "fee": 100.0
+  }
+]
